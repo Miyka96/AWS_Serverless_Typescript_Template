@@ -34,4 +34,4 @@ A very useful guide to create and manage aws credentials
 After that, the use of credentials and the execution of commands (ex. sls deploy) 
 will be automatic if you insert repository secrets and run correctly github actions)
 
-https://www.serverless.com/framework/docs/providers/aws/guide/credentials# AWS_Serverless_Typescript_Template
+https://www.serverless.com/framework/docs/providers/aws/guide/credentials
