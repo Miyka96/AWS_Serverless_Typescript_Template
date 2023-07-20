@@ -1,0 +1,53 @@
+# change this string with your app name
+service: your-service-name
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: provided.al2
+# change this string with the name of the aws region where you want to deploy your functions ex. "eu-central-1"
+  region: your-aws-region
+  memorySize: 1024
+
+package:
+  individually: true
+  artifact: build/bootstrap.zip
+
+# here you can find the plugins info https://www.serverless.com/plugins
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-prune-plugin
+  - serverless-esbluild
+
+custom:
+  prune:
+    automatic: true
+    number: 3
+
+functions:
+  hello:
+    handler: src/api/hello.hello
+    events:
+      - http:
+          path: /hello
+          method: GET
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - Content-Encoding
+  # getUser:
+  #   handler: src/api/get_user.getUser
+  #   events:
+  #     - http:
+  #         path: /user
+  #         method: PUT
+  #         cors:
+  #           origin: "*"
+  #           headers:
+  #             - Content-Type
+  #             - Content-Encoding
+  #   iamRoleStatements:
+  #     - Effect: "Allow"
+  #       Action:
+  #         - dynamodb:PutItem
+  #       Resource: "arn:aws:dynamodb:*:yourAWSAccountNumber:table/yourTableName"
