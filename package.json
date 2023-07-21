@@ -1,5 +1,5 @@
 {
-  "name": "camelot-backend-typescript",
+  "name": "typescript-serverless-aws-template",
   "version": "0.0.11",
   "description": "Serverless aws-nodejs-typescript template",
   "main": "serverless.ts",
@@ -13,11 +13,9 @@
     "@aws-sdk/client-dynamodb": "^3.100.0",
     "@aws-sdk/util-dynamodb": "^3.100.0",
     "aws-sdk": "^2.1148.0",
-    "lambda-compression": "^0.2.10",
-    "serverless-iam-roles-per-function": "^3.2.0",
-    "serverless-prune-plugin": "^2.0.2",
     "serverless-esbuild": "^1.23.3",
-    "uuid": "^8.3.2"
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "serverless-prune-plugin": "^2.0.2"
   },
   "devDependencies": {
     "@serverless/typescript": "^2.23.0",

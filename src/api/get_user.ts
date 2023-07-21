@@ -1,4 +1,3 @@
-import { compress } from 'lambda-compression';
 import { APIGatewayProxyResultV2 } from 'aws-lambda';
 import { APIGatewayProxyEventV2 } from 'aws-lambda';
 import {dynamoGetUser} from '../../functions/dynamo/get_user'
@@ -13,22 +12,16 @@ export async function getUser(
     const userID = event.queryStringParameters['userID'];
     const user = await dynamoGetUser(dynamo,userID);
     
-    return compress(event,{
+    return {
       headers: { "Access-Control-Allow-Origin": "*" , "Content-Type": "application/json"},
       statusCode: 200,
-      body: JSON.stringify({
-        status: "ok",
-        content: {user: user},
-      }),
-    });
+      body: JSON.stringify(user)
+    };
   } catch (error) {
-    return compress(event,{
+    return{
       headers: { "Access-Control-Allow-Origin": "*" , "Content-Type": "application/json" },
       statusCode: 500,
-      body: JSON.stringify({
-        status: "ko",
-        error: error.toString(),
-      }),
-    });
+      body: error.toString(),
+    };
   }
 };

@@ -1,4 +1,3 @@
-import { compress } from 'lambda-compression';
 import { APIGatewayProxyResultV2 } from 'aws-lambda';
 import { APIGatewayProxyEventV2 } from 'aws-lambda';
 
@@ -6,27 +5,22 @@ export async function hello(
     event: APIGatewayProxyEventV2
   ): Promise<APIGatewayProxyResultV2> {
   try {
-
+    
+    console.log(event);
     //your function 
 
     
-    return compress(event,{
+    return {
       headers: { "Access-Control-Allow-Origin": "*" , "Content-Type": "application/json"},
       statusCode: 200,
-      body: JSON.stringify({
-        status: "ok",
-        content: "hello! world!",
-      }),
-    });
+      body: "hello world!",
+    };
   } catch (error) {
-    return compress(event,{
+    return{
       headers: { "Access-Control-Allow-Origin": "*" , "Content-Type": "application/json" },
       statusCode: 500,
-      body: JSON.stringify({
-        status: "ko",
-        error: error.toString(),
-      }),
-    });
+      body: error.toString(),
+    };
   }
 };
 
