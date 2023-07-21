@@ -2,7 +2,7 @@ name: Main
 on: push
 
 jobs:
-  deploy_TS:
+  deploy_main:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -14,11 +14,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
+          aws-region: your-aws-region
       - name: Deploy
         if: env.AWS_ACCESS_KEY_ID && env.AWS_SECRET_ACCESS_KEY
         #STAGE: prod
         run: |
-          cd ts
           npm install
           npx serverless deploy
